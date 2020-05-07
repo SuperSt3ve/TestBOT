@@ -5,4 +5,4 @@ client.events = new Collection();
 client.commands = new Collection();
 client.prefix = prefix;
 ["command", "event"].forEach(x => require(`./handlers/${x}`)(client));
-client.login(token).catch(console.error):
+client.login(token).catch(console.error);
