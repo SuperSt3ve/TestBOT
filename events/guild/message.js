@@ -1,14 +1,15 @@
-exports.run = (client, message) => { 
+exports.run = async (client, message) => { 
 
         if (message.author.bot || message.channel.type === "dm") return;
+        if (message.content.indexOf(settings.prefix) !== 0) return;
+        if (message.guild && !message.member) await message.guild.fetchMember(message.author);
 
         let args = message.content.slice(client.prefix.length).trim().split(/ +/g);
-        let cmd = args.shift().toLowerCase();   
+        let command = args.shift().toLowerCase();
+        let cmd = client.commands.get(command);
 
-        if (!message.content.startsWith(client.prefix)) return;
+        if (!cmd) return;
 
-        let command_file = client.commands.get(cmd);
-
-        if (command_file) command_file.run(client, message, args);
+        cmd.run(client, message, args);
 
 }

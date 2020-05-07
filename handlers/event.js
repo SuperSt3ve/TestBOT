@@ -1,6 +1,6 @@
 const { readdirSync } = require("fs");
 
-exports.run = (client) => {
+exports.run = async (client) => {
 
     const load = dirs => {
 
